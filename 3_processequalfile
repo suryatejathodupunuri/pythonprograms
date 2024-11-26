@@ -1,0 +1,32 @@
+import sys
+#further procees equal file and obtain final 2 colums.
+def compare_columns(input_file, equal_file):
+    with open(input_file, 'r') as infile, open(equal_file, 'w') as equal_outfile:
+        # Iterate over each line in the input file
+        for line in infile:
+            # Split the line by tab
+            columns = line.strip().split('\t')
+            
+            # Ensure the line has at least 4 columns
+            if len(columns) >= 4:
+                col1 = columns[0]  # First column
+                col2 = columns[1]  # Second column
+                col3 = columns[2]  # Third column
+                col4 = columns[3]  # Fourth column
+                
+                # Check if any two of columns 2, 3, and 4 are equal
+                if col2 == col3 or col2 == col4 or col3 == col4:
+                    # Find the equal column value
+                    equal_value = col2 if col2 == col3 or col2 == col4 else col3
+                    
+                    # Write col1 and the equal column value to the output file
+                    equal_outfile.write(f"{col1}\t{equal_value}\n")
+    
+    print("success")
+
+# Define the file paths from command-line arguments
+input_file = sys.argv[1]  # The input file path
+equal_file = sys.argv[2]  # Output file for equal data
+
+# Call the function to process the file and generate outputs
+compare_columns(input_file, equal_file)
