@@ -1,0 +1,29 @@
+import sys;
+def filter_by_charcount(input_file, output_file, max_charcount):
+    
+    # Open the input file for reading and output file for writing
+    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+        # Iterate over each line in the input file
+        for line in infile:
+            # Split the line by tab to get the columns
+            columns = line.strip().split('\t')
+            
+            # Ensure the line has at least one column (for col1)
+            if len(columns) > 0:
+                col1 = columns[0]  # First column
+                
+                # Check if the length of col1 is less than or equal to max_charcount
+                if len(col1) <= max_charcount:
+                    # If condition is met, write the entire line to the output file
+                    outfile.write(line)
+
+    print("success")
+
+
+
+input_file = sys.argv[1] # Path to input file
+output_file = sys.argv[2]  # Path to output file
+max_charcount = int(sys.argv[3])
+
+# Call the function to filter lines and write to the output file
+filter_by_charcount(input_file, output_file, max_charcount)
